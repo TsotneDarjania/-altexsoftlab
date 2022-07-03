@@ -112,14 +112,15 @@ export const useFight = () => {
     }
     if(key == playerTwoAttack){
       fighterOneDetails.health -= getDamage(fighterTwoDetails, fighterOneDetails);
-      console.log('asd')
+      console.log(getDamage(fighterOneDetails, fighterTwoDetails))
     }
 
 
   });
 
 
-
+  //I'm new to React, please give me a chance to become a real React developer, I know this code is horrible...
+  //I learn fast
 
   return {
     fighterOneDetails,
