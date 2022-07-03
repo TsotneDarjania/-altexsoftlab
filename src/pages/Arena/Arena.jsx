@@ -2,8 +2,18 @@ import { HealthBar, Modal } from "../../components";
 import "./Arena.scss";
 import { useFight } from "./hooks";
 
+import { useBoard } from "../Board/hook/useBoard";
+
+
 const Arena = () => {
   const { fighterOneDetails, fighterTwoDetails, winner } = useFight();
+  const { getFighterInfo } = useBoard();
+
+  window.addEventListener('keypress', e => {
+    
+
+  });
+
 
   return (
     <div className="arena">

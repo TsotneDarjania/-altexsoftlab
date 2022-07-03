@@ -5,6 +5,9 @@ import { useBoard } from "./hook/useBoard";
 import FighterSidebar from "./components/FighterSidebar/FighterSidebar";
 import { Loader } from "../../components";
 
+let playerdate_1 = '';
+let playerdate_2 = '';
+
 const Board = () => {
   const { isLoading, fighters, getFighterInfo, fighter } = useBoard();
   const [selectedFightersData, setFightersData] = useState({
@@ -16,10 +19,28 @@ const Board = () => {
 
   const { playerOne, playerTwo } = selectedFightersData;
 
+
+
   const handleClick = (id, player) => {
     getFighterInfo(id);
     setSelectedPlayer(player);
     setSelectedFightersQty(selectedFightersQty + 1);
+
+
+    getFighterInfo(id).then((res) => {
+
+      if(selectedFightersQty == 0){
+        const playerdate = res["data"];
+        playerdate_1 = playerdate;
+      }
+      if(selectedFightersQty == 1){
+        const playerdate = res["data"];
+        playerdate_2 = playerdate;
+      }
+
+      setFightersData({playerOne : playerdate_1, playerTwo : playerdate_2});
+
+    });
   };
 
   // TODO add logic for setting selectedFightersData
@@ -45,7 +66,7 @@ const Board = () => {
           <div>
             <h2 className="title">CHOOSE YOUR FIGHTER</h2>
             <div className="board-wrapper">
-              {fighters.map(({ avatar, id }) => (
+              {fighters.map(({ avatar, id, name }) => (
                 <div key={id} className="avatar-wrapper">
                   {selectedFightersQty ? (
                     <button
